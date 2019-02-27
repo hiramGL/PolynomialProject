@@ -7,14 +7,12 @@ public class ArrayList<E> implements List {
 	private static final int INITCAP = 5;
 	private E[] elements;
 	
-	private int size = 0;
+	private int size;
 
 	public ArrayList() {
 		elements = (E[]) new Object[INITCAP];
+		size = 0;
 	}
-
-	
-	/////////////// NOT IMPLEMENTED//////////////////////
 	
 	private class ArrayListIterator<E> implements Iterator<E>{
 		int i = 0;
@@ -56,7 +54,7 @@ public class ArrayList<E> implements List {
 			changeCapacity();
 		if (index == size)
 			add(obj);
-
+		
 		moveDataAfterAdd(index);
 		elements[index] = (E) obj;
 		size++;
@@ -92,17 +90,15 @@ public class ArrayList<E> implements List {
 		// TODO Auto-generated method stub
 		int objectsFounds = 0;
 		for(int i = 0; i < size;i++){
-			if(elements[i] == (E) obj){
+			if(elements[i] == (E) obj)
 				remove(i);
-				objectsFounds++;
-			}
+			objectsFounds++;
 		}
+		
 		return objectsFounds;
 	}
 
-	
 	@Override
-	
 	public Object get(int index) {
 		// TODO Auto-generated method stub
 		if (index < 0 || index >= size)
@@ -174,7 +170,6 @@ public class ArrayList<E> implements List {
 		return size;
 	}
 
-
 	public int length() {
 		return elements.length;
 	}
@@ -187,7 +182,7 @@ public class ArrayList<E> implements List {
 	}
 
 	@Override
-	///////////////IMPLEMENTED-NOT TESTED///////////////////
+	
 	public boolean contains(Object obj) {
 		// TODO Auto-generated method stub
 		boolean isInList = false;
@@ -203,14 +198,15 @@ public class ArrayList<E> implements List {
 	@Override
 	
 	public void clear() {
+
 		// TODO Auto-generated method stub
+		
 		for(int i = 0; i < size; i ++){
 			elements[i] = null;
 		}
 		size = 0;
 	}
 	
-
 	/**
 	 * Doubles the size of the array
 	 */
@@ -220,6 +216,7 @@ public class ArrayList<E> implements List {
 			newArray[i] = elements[i];
 		}
 		elements = newArray;
+		
 	}
 	
 	/**
