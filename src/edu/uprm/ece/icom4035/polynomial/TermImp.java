@@ -3,7 +3,7 @@ package edu.uprm.ece.icom4035.polynomial;
 public class TermImp implements Term {
 	private double coefficient;
 	private int exponent;
-	private String term;
+	private String term; //term to be examinated and divided into coefficient and exponent
 	
 	public TermImp(double coefficient,int exponent){
 		this.coefficient = coefficient;

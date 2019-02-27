@@ -12,7 +12,9 @@ public class PolynomialImp implements Polynomial{
 	ListFactory listFactory = TermListFactory.newListFactory();
 	List termList;
 	TermImp terms;
-	
+	/*
+	 * constructor
+	 */
 	public PolynomialImp(String string) {
 		polynomialStructure = string;
 		termList = listFactory.newInstance();
