@@ -2,12 +2,23 @@ package edu.uprm.ece.icom4035.polynomial;
 
 import java.util.Iterator;
 
+import edu.uprm.ece.icom4035.list.ArrayList;
+import edu.uprm.ece.icom4035.list.ArrayListFactory;
+import edu.uprm.ece.icom4035.list.List;
+import edu.uprm.ece.icom4035.list.ListFactory;
+
 public class PolynomialImp implements Polynomial{
-
+	String polynomialStructure;
+	ListFactory listFactory = TermListFactory.newListFactory();
+	List termList;
+	TermImp terms;
+	
 	public PolynomialImp(String string) {
-		// TODO Auto-generated constructor stub
+		polynomialStructure = string;
+		termList = listFactory.newInstance();
+		
 	}
-
+	
 	@Override
 	public Iterator<Term> iterator() {
 		// TODO Auto-generated method stub
