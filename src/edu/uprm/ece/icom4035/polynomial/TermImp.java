@@ -4,11 +4,17 @@ public class TermImp implements Term {
 	private double coefficient;
 	private int exponent;
 	private String term; //term to be examinated and divided into coefficient and exponent
-	
-	public TermImp(double coefficient,int exponent){
-		this.coefficient = coefficient;
-		this.exponent = exponent;
+	public TermImp(String term){
+		this.term = term;
 	}
+	public void setTerm(String term){
+		this.term = term;
+	}
+	
+	public String getTerm(){
+		return term;
+	}
+	
 	public void setCoefficient(double coefficient){
 		this.coefficient = coefficient;
 	}

@@ -10,17 +10,28 @@ import edu.uprm.ece.icom4035.list.ListFactory;
 public class PolynomialImp implements Polynomial{
 	String polynomialStructure;
 	ListFactory listFactory = TermListFactory.newListFactory();
-	List termList;
-	TermImp terms;
+	 List termList;
+	
 	/*
 	 * constructor
 	 */
 	public PolynomialImp(String string) {
 		polynomialStructure = string;
 		termList = listFactory.newInstance();
+		convertToTerms(polynomialStructure);
+	}
+	/**
+	 * Add the terms in the polynomial to an arrayList
+	 * @param string
+	 * TODO it just add the term to the arrayList it doesn't know the coefficient nor the exponent yet
+	 */
+	private void convertToTerms(String string){
+		String[] termsString = string.split("[+]");
+		for(String s: termsString){
+			termList.add((TermImp) new TermImp(s));
+		}
 		
 	}
-	
 	@Override
 	public Iterator<Term> iterator() {
 		// TODO Auto-generated method stub
