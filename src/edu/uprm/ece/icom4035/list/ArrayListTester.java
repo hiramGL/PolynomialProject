@@ -1,21 +1,32 @@
 package edu.uprm.ece.icom4035.list;
 
+import java.util.Iterator;
+
 public class ArrayListTester {
+	private  class Person{
+		private int id;
+		private String name;
+		
+		public Person(String name, int id){
+			this.name = name;
+			this.id = id;
+		}
+	}
+	
 	public static void main(String[] args) {
-		ArrayList<double[]> list = new ArrayList();
-		list.add(10.0);
-		list.add(10.0);
-		list.add(49);
-		list.add(10.0);
-		list.add(20392.0);
-		printArray(list);
-		System.out.println("first index of 10 is " + list.firstIndex(49));
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(15);
+		list.add(12);
+		list.add(13);
+		Iterator<Integer> iter = list.iterator();
+		
+		printArray((ArrayList<Integer>) list);
 		
 	}
 	
-	public static void printArray(ArrayList list){
+	public static void printArray(ArrayList<Integer> list){
 		System.out.println("List is: ");
-		for(int i = 0; i < list.length();i++){
+		for(int i = 0; i < list.size();i++){
 			System.out.println(list.get(i)+ " ");
 		}
 		System.out.println("size is " + list.size());

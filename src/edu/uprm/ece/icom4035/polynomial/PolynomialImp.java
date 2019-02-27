@@ -4,6 +4,10 @@ import java.util.Iterator;
 
 public class PolynomialImp implements Polynomial{
 
+	public PolynomialImp(String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public Iterator<Term> iterator() {
 		// TODO Auto-generated method stub
