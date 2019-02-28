@@ -8,16 +8,22 @@ import edu.uprm.ece.icom4035.list.List;
 import edu.uprm.ece.icom4035.list.ListFactory;
 
 public class PolynomialImp implements Polynomial {
-	String polynomialStructure;
-	ListFactory listFactory = TermListFactory.newListFactory();
-	List termList;
+	private String polynomialStructure;
+	private ListFactory listFactory = TermListFactory.newListFactory();
+	private List termList;
 
 	public PolynomialImp(String string) {
 		polynomialStructure = string;
 		termList = listFactory.newInstance();
 		convertToTerms(polynomialStructure);
+		
 	}
-
+	
+	public String toString(){
+		return polynomialStructure;
+		
+	}
+	
 	/**
 	 * Add the terms in the polynomial to an arrayList
 	 * 
@@ -30,11 +36,6 @@ public class PolynomialImp implements Polynomial {
 		for (String s : termsString) {
 			termList.add((TermImp) new TermImp(s));
 		}
-		Iterator<TermImp> iter = termList.iterator();
-		while (iter.hasNext()) {
-			iter.next().setup();
-		}
-
 	}
 
 	@Override
@@ -46,12 +47,13 @@ public class PolynomialImp implements Polynomial {
 	@Override
 	public Polynomial add(Polynomial P2) {
 		// TODO Auto-generated method stub
-		return null;
+		return P2;
 	}
 
 	@Override
 	public Polynomial subtract(Polynomial P2) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

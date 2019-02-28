@@ -15,8 +15,19 @@ public class TermImp implements Term {
 	 * TODO implement this method correctly
 	 */
 	public void setup() {
-
+		if(term.contains("x")){
+			if(term.contains("^")){
+				exponent = Integer.parseInt(term.substring(term.charAt('^') + 1, term.length() - 1));
+			}
+			exponent = 1;
+			coefficient = Double.parseDouble(term.substring(0, term.charAt('x') - 1));
+			
+			return;
+		}
+		exponent = 0;
+		coefficient = coefficient.parseDouble(term);
 	}
+	
 
 	public void setTerm(String term) {
 		this.term = term;
@@ -50,6 +61,16 @@ public class TermImp implements Term {
 	public double evaluate(double x) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return this.exponent == ((TermImp) obj).exponent ;
+	}
+	
+	public String toString(){
+		return "term is " + term + ": \n its coefficient and exponent are "+ coefficient + " " + exponent;
 	}
 
 }

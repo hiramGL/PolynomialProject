@@ -219,6 +219,7 @@ public class ArrayList<E> implements List {
 		
 	}
 	
+	
 	/**
 	 * Move data one position to right after adding a value.
 	 * @param from index where the new element is going to be added          
