@@ -36,6 +36,7 @@ public class PolynomialImp implements Polynomial {
 		for (String s : termsString) {
 			termList.add((TermImp) new TermImp(s));
 		}
+		Iterator<TermImp> iterator = termList.iterator();
 	}
 
 	@Override
@@ -103,6 +104,24 @@ public class PolynomialImp implements Polynomial {
 	public boolean equals(Polynomial P) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	private class PolynomialIterator<Term> implements Iterator<Term>{
+		String[] termsString = polynomialStructure.split("[+]");
+		int TermsInPolynomial = termsString.length - 1;
+		int index = 0;
+		@Override
+		public boolean hasNext() {
+			// TODO Auto-generated method stub
+			return TermsInPolynomial < termsString.length;
+		}
+
+		@Override
+		public Term next() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
 	}
 
 }

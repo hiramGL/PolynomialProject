@@ -8,41 +8,27 @@ public class TermImp implements Term {
 
 	public TermImp(String term) {
 		this.term = term;
+		setup();
 	}
-
 	/**
-	 * Based on the term it sets the coefficient and exponent
-	 * TODO implement this method correctly
+	 * Set the value of coefficient and exponent based on the term.
 	 */
-	public void setup() {
+	private void setup(){
 		if(term.contains("x")){
-			if(term.contains("^")){
-				exponent = Integer.parseInt(term.substring(term.charAt('^') + 1, term.length() - 1));
-			}
 			exponent = 1;
-			coefficient = Double.parseDouble(term.substring(0, term.charAt('x') - 1));
-			
-			return;
+			if(term.contains("^")){
+				exponent = exponent.parseInt(term.substring(term.indexOf("^")+1, term.length()));
+			}
+			coefficient = coefficient.parseDouble(term.substring(0, term.indexOf("x")));
 		}
-		exponent = 0;
-		coefficient = coefficient.parseDouble(term);
+		if(!term.contains("x")){
+			coefficient = coefficient.parseDouble(term);
+			exponent = 0;
+		}
 	}
 	
-
-	public void setTerm(String term) {
-		this.term = term;
-	}
-
 	public String getTerm() {
 		return term;
-	}
-
-	public void setCoefficient(double coefficient) {
-		this.coefficient = coefficient;
-	}
-
-	public void setExponent(int exponent) {
-		this.exponent = exponent;
 	}
 
 	@Override
