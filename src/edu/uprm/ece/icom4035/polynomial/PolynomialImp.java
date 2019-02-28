@@ -106,22 +106,8 @@ public class PolynomialImp implements Polynomial {
 		return false;
 	}
 	
-	private class PolynomialIterator<Term> implements Iterator<Term>{
-		String[] termsString = polynomialStructure.split("[+]");
-		int TermsInPolynomial = termsString.length - 1;
-		int index = 0;
-		@Override
-		public boolean hasNext() {
-			// TODO Auto-generated method stub
-			return TermsInPolynomial < termsString.length;
-		}
-
-		@Override
-		public Term next() {
-			// TODO Auto-generated method stub
-			return null;
-		}
+	//private class PolynomialIterator<Term> implements Iterator<Term>{}
 		
-	}
+	
 
 }
