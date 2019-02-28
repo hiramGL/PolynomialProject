@@ -26,17 +26,14 @@ public class PolynomialImp implements Polynomial {
 	
 	/**
 	 * Add the terms in the polynomial to an arrayList
-	 * 
 	 * @param string
-	 *            TODO it just add the term to the arrayList it doesn't know the
-	 *            coefficient nor the exponent yet
 	 */
 	private void convertToTerms(String string) {
 		String[] termsString = string.split("[+]");
 		for (String s : termsString) {
 			termList.add((TermImp) new TermImp(s));
 		}
-		Iterator<TermImp> iterator = termList.iterator();
+		
 	}
 
 	@Override
@@ -48,7 +45,7 @@ public class PolynomialImp implements Polynomial {
 	@Override
 	public Polynomial add(Polynomial P2) {
 		// TODO Auto-generated method stub
-		return P2;
+	 return null;
 	}
 
 	@Override
@@ -91,7 +88,7 @@ public class PolynomialImp implements Polynomial {
 	@Override
 	public int degree() {
 		// TODO Auto-generated method stub
-		return 0;
+		return ((TermImp) termList.first()).getExponent();
 	}
 
 	@Override
