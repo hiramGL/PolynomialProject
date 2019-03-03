@@ -104,7 +104,7 @@ public class Test1 {
 	@Test
 	public void testToString() {
 		String string1 = P1.toString();
-		String string2 = "8.00x^2+1.00";
+		String string2 = "8.0x^2+1.0";
 		System.out.printf("toString-> string1: %s, string2: %s\n", string1, string2);
 		assertTrue(string1.equals(string2));
 	}

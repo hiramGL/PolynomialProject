@@ -124,20 +124,20 @@ public class ArrayList<E> implements List {
 		// TODO Auto-generated method stub
 		if (isEmpty())
 			return null;
-		return elements[0];
+		return (E) elements[0];
 	}
 
 	@Override
 
 	public Object last() {
 		// TODO Auto-generated method stub
-		if (isEmpty())
+		if (isEmpty()) 
 			return null;
-		return elements[size - 1];
+		return (E) elements[size - 1];
 	}
 
 	@Override
-	///////////////IMPLEMENTED-NOT TESTED///////////////////
+	
 	public int firstIndex(Object obj) {
 		// TODO Auto-generated method stub
 		int indexOfObj = 0;
@@ -150,7 +150,7 @@ public class ArrayList<E> implements List {
 	}
 
 	@Override
-	///////////////IMPLEMENTED-NOT TESTED///////////////////
+	
 	public int lastIndex(Object obj) {
 		// TODO Auto-generated method stub
 		int indexOfObj = -1;
