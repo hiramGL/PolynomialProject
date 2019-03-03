@@ -141,15 +141,8 @@ public class PolynomialImp implements Polynomial {
 
 	@Override
 	public boolean equals(Polynomial P) {
-		System.out.println("Im here");
-		boolean areEquals = true;
-		Iterator<Term> iterp1 = this.iterator();
-		Iterator<Term> iterp2 = ((PolynomialImp) P).iterator();
-		while(iterp1.hasNext()){
-			if(!(iterp1.next().equals(iterp2.next())))
-				areEquals = false;
-		}
-		return areEquals;
+		
+		return (this.polynomialStructure.equals(((PolynomialImp) P).polynomialStructure));
 	}
 	// private class PolynomialIterator<Term> implements Iterator<Term>{}
 
