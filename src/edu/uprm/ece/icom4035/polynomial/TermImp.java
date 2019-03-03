@@ -16,6 +16,7 @@ public class TermImp implements Term {
 	public TermImp(double coef, int exp){
 		coefficient = coef;
 		exponent = exp;
+		this.term = toTerm();
 	}
 	//----------------------------------------
 	

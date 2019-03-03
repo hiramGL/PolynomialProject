@@ -95,13 +95,35 @@ public class PolynomialImp implements Polynomial {
 	@Override
 	public Polynomial multiply(Polynomial P2) {
 		// TODO Auto-generated method stub
-		return null;
+		PolynomialImp resultingPol = new PolynomialImp();
+		Iterator<Term> iter1 = this.iterator();
+		Iterator<Term> iter2 = ((PolynomialImp) P2).iterator();
+		while(iter1.hasNext()){
+			TermImp ct1 = (TermImp) iter1.next();
+			TermImp ct2 = (TermImp) iter2.next();
+			resultingPol.termList.add(new TermImp(ct1.getCoefficient()*ct2.getCoefficient(),ct1.getExponent()+ct2.getExponent()));
+			
+		}
+		resultingPol.convertToStructure();
+		return resultingPol;
 	}
 
 	@Override
 	public Polynomial multiply(double c) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		PolynomialImp newPol = new PolynomialImp(this.polynomialStructure);
+		newPol.termList.clear();
+		
+		Iterator<Term> iter = this.iterator();
+		TermImp ct;
+		while(iter.hasNext()){
+			ct = (TermImp) iter.next(); 
+			TermImp newterm = new TermImp((Double) ct.getCoefficient()*c, ct.getExponent());
+			newPol.termList.add(newterm);
+		}
+		newPol.convertToStructure();
+		
+		return newPol;
 	}
 
 	@Override
