@@ -57,6 +57,23 @@ public class PolynomialImp implements Polynomial {
 		}
 		this.polynomialStructure = structure;
 	}
+	private void checkPolynomial(){
+		Iterator<Term> iter = this.iterator();
+		TermImp ct = null;
+		int firstIndex = 0;
+		int lastIndex = 0;
+		while(iter.hasNext()){
+			ct = (TermImp) iter.next();
+			firstIndex = termList.firstIndex(ct);
+			lastIndex = termList.lastIndex(ct);
+			while(firstIndex != lastIndex){
+				TermImp newterm = new TermImp(((TermImp) termList.get(firstIndex)).getCoefficient() + ((TermImp) termList.get(lastIndex)).getCoefficient(),((TermImp) termList.get(lastIndex)).getExponent());
+				termList.set(firstIndex, newterm);
+				termList.remove(lastIndex);
+			}
+		}
+	 convertToStructure();
+	}
 	//-----------------------------------------------------------------
 	@Override
 	public Iterator<Term> iterator() {
@@ -95,17 +112,23 @@ public class PolynomialImp implements Polynomial {
 	@Override
 	public Polynomial multiply(Polynomial P2) {
 		// TODO Auto-generated method stub
-		PolynomialImp resultingPol = new PolynomialImp();
-		Iterator<Term> iter1 = this.iterator();
-		Iterator<Term> iter2 = ((PolynomialImp) P2).iterator();
-		while(iter1.hasNext()){
-			TermImp ct1 = (TermImp) iter1.next();
-			TermImp ct2 = (TermImp) iter2.next();
-			resultingPol.termList.add(new TermImp(ct1.getCoefficient()*ct2.getCoefficient(),ct1.getExponent()+ct2.getExponent()));
-			
+		PolynomialImp newPol = new PolynomialImp();
+		PolynomialImp pP2 = (PolynomialImp) P2;
+		Iterator<Term> iter = this.iterator();
+		Iterator<Term> iter2 = pP2.iterator();
+		TermImp ct1 = null;
+		TermImp ct2 = null;
+		while(iter.hasNext()){
+			ct1 = (TermImp) iter.next();
+			while(iter2.hasNext()){
+				ct2 = (TermImp) iter2.next();
+				TermImp newTerm = new TermImp(ct1.getCoefficient()*ct2.getCoefficient(),ct1.getExponent()+ct2.getExponent());
+				newPol.termList.add(newTerm);
+			}
+			iter2 = pP2.iterator();
 		}
-		resultingPol.convertToStructure();
-		return resultingPol;
+		newPol.checkPolynomial();
+		return newPol;
 	}
 
 	@Override

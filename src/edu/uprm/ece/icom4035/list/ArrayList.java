@@ -142,7 +142,7 @@ public class ArrayList<E> implements List {
 		// TODO Auto-generated method stub
 		int indexOfObj = 0;
 		for (int i = 0; i < size(); i++) {
-			if (((E) obj) == elements[i])
+			if (((E) obj).equals(elements[i]))
 				return indexOfObj;
 			indexOfObj++;
 		}
@@ -155,7 +155,7 @@ public class ArrayList<E> implements List {
 		// TODO Auto-generated method stub
 		int indexOfObj = -1;
 		for (int i = 0; i < size(); i++) {
-			if (elements[i] == ((E) obj))
+			if (elements[i].equals((E) obj))
 				indexOfObj = i;
 
 		}
@@ -187,7 +187,7 @@ public class ArrayList<E> implements List {
 		// TODO Auto-generated method stub
 		boolean isInList = false;
 		for (int i = 0; i < length(); i++) {
-			if (elements[i] == (E) obj) {
+			if (elements[i].equals((E) obj)) {
 				isInList = true;
 				break;
 			}
