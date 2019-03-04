@@ -57,6 +57,7 @@ public class PolynomialImp implements Polynomial {
 		}
 		this.polynomialStructure = structure;
 	}
+	/** Simplify a polynomial if it has same terms*/
 	private void checkPolynomial(){
 		Iterator<Term> iter = this.iterator();
 		TermImp ct = null;
@@ -66,14 +67,22 @@ public class PolynomialImp implements Polynomial {
 			ct = (TermImp) iter.next();
 			firstIndex = termList.firstIndex(ct);
 			lastIndex = termList.lastIndex(ct);
-			while(firstIndex != lastIndex){
-				TermImp newterm = new TermImp(((TermImp) termList.get(firstIndex)).getCoefficient() + ((TermImp) termList.get(lastIndex)).getCoefficient(),((TermImp) termList.get(lastIndex)).getExponent());
-				termList.set(firstIndex, newterm);
+			
+			if(firstIndex != lastIndex){
+				TermImp term1 = (TermImp) termList.get(firstIndex);
+				TermImp term2 = (TermImp) termList.get(lastIndex);
+				TermImp newTerm = new TermImp(term1.getCoefficient()+term2.getCoefficient(),term1.getExponent());
+						
+				termList.set(firstIndex, newTerm);
 				termList.remove(lastIndex);
+				
 			}
 		}
 	 convertToStructure();
+	
+	
 	}
+	
 	//-----------------------------------------------------------------
 	@Override
 	public Iterator<Term> iterator() {
@@ -98,15 +107,29 @@ public class PolynomialImp implements Polynomial {
 			resultPol.convertToStructure();
 		}
 		
-		
+	
 		return resultPol;
 	}
 
 	@Override
 	public Polynomial subtract(Polynomial P2) {
 		// TODO Auto-generated method stub
+		PolynomialImp pp2 = (PolynomialImp) P2;
+		PolynomialImp resultPol = new PolynomialImp();
+		Iterator<Term> iter1 =  this.iterator();
+		Iterator<Term> iter2 =  pp2.iterator();
+		
+		while(iter1.hasNext()){
+			Term ct1 = iter1.next();
+			Term ct2 = iter2.next();
+			TermImp newterm = new TermImp(ct1.getCoefficient()-ct2.getCoefficient(),ct1.getExponent());
+			resultPol.termList.add(newterm);
+			resultPol.convertToStructure();
+		}
+		
+		
+		return resultPol;
 
-		return null;
 	}
 
 	@Override
@@ -124,10 +147,13 @@ public class PolynomialImp implements Polynomial {
 				ct2 = (TermImp) iter2.next();
 				TermImp newTerm = new TermImp(ct1.getCoefficient()*ct2.getCoefficient(),ct1.getExponent()+ct2.getExponent());
 				newPol.termList.add(newTerm);
+				
 			}
 			iter2 = pP2.iterator();
 		}
+		
 		newPol.checkPolynomial();
+	
 		return newPol;
 	}
 
@@ -152,19 +178,54 @@ public class PolynomialImp implements Polynomial {
 	@Override
 	public Polynomial derivative() {
 		// TODO Auto-generated method stub
-		return null;
+		Iterator<Term> iter = iterator();
+		TermImp ct = null;
+		TermImp nt = null;
+		int indexOfTerm = 0;
+		while(iter.hasNext()){
+			ct = (TermImp) iter.next();
+			if(ct.getExponent() > 0){
+				nt= new TermImp(ct.getCoefficient()*ct.getExponent(),ct.getExponent()- 1);
+				termList.set(indexOfTerm, nt);
+			}
+			else{
+				termList.remove(indexOfTerm);
+			}
+			indexOfTerm++;
+		}
+		return this;
 	}
 
 	@Override
 	public Polynomial indefiniteIntegral() {
 		// TODO Auto-generated method stub
-		return null;
+		Iterator<Term> iter = iterator();
+		TermImp ct = null;
+		TermImp newterm = null;
+		int indexOfTerm = 0;
+		while(iter.hasNext()){
+			ct = (TermImp) iter.next();
+			newterm = new TermImp(ct.getCoefficient()/(ct.getExponent()+1),ct.getExponent()+1);
+			termList.set(termList.firstIndex(ct), newterm);
+		}
+		termList.add(new TermImp(1,0));
+		return this;
 	}
 
 	@Override
 	public double definiteIntegral(double a, double b) {
 		// TODO Auto-generated method stub
-		return 0;
+		this.indefiniteIntegral();
+		Iterator<Term> iter = iterator();
+		double evaluatedB = 0;
+		double evaluatedA = 0;
+		TermImp ct = null;
+		while(iter.hasNext()){
+			ct = (TermImp) iter.next();
+			evaluatedB += ct.evaluate(b);
+			evaluatedA += ct.evaluate(a);
+		}
+		return evaluatedB - evaluatedA;
 	}
 
 	@Override

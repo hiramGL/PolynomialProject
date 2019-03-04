@@ -68,16 +68,14 @@ public class TermImp implements Term {
 		// TODO Auto-generated method stub
 		if(exponent == 0)
 			return coefficient;
-		return coefficient*(x*x);
+		return coefficient*(Math.pow(x, exponent));
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		// TODO Auto-generated method stub
 		TermImp tobj = (TermImp) obj;
-		System.out.println("coef and expo of instance is " + this.coefficient + "  " + this.exponent);
-		System.out.println("coef and expo of obj is " + tobj.coefficient + "  " + tobj.exponent);
-		return ((this.exponent ==  tobj.exponent)&& (this.coefficient == tobj.coefficient)) ;
+		return ((this.exponent ==  tobj.exponent)) ;
 	}
 	
 	public String toString(){
