@@ -29,7 +29,12 @@ public class TermImp implements Term {
 			if(term.contains("^")){
 				exponent = exponent.parseInt(term.substring(term.indexOf("^")+1, term.length()));
 			}
+			try{
 			coefficient = coefficient.parseDouble(term.substring(0, term.indexOf("x")));
+			}
+			catch(NumberFormatException e){
+				coefficient = 1.0;
+			}
 		}
 		if(!term.contains("x")){
 			coefficient = coefficient.parseDouble(term);
@@ -40,10 +45,15 @@ public class TermImp implements Term {
 	/** Return the string representation of this term*/
 	public String toTerm(){
 		String termS = "";
-			termS += coefficient ;
+			
+			termS += String.format("%.2f",coefficient) ;
 			if(exponent > 0)
+				if(exponent == 1){
+					termS += "x";
+				}
+				else{
 				termS += "x^" + exponent;
-		
+				}
 		return termS;
 	}
 	//-----------------------------------------------
@@ -79,7 +89,7 @@ public class TermImp implements Term {
 	}
 	
 	public String toString(){
-		return "term is " + term + ": \n its coefficient and exponent are "+ coefficient + " " + exponent;
+		return term ;
 	}
 
 }

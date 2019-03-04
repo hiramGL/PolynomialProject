@@ -78,7 +78,7 @@ public class ArrayList<E> implements List {
 		// TODO Auto-generated method stub
 		if (index < 0 || index >= size)
 			throw new IndexOutOfBoundsException("Invalid index to remove");
-
+		
 		moveDataAfterRemove(index);
 		size--;
 		return true;

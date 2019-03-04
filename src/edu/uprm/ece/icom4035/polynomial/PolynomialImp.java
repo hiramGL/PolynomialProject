@@ -47,6 +47,10 @@ public class PolynomialImp implements Polynomial {
 	}
 	private void convertToStructure(){
 		String structure = "";
+		if(termList.isEmpty()){
+			this.polynomialStructure = "0.00";
+			return;
+		}
 		Iterator<TermImp> iter = termList.iterator();
 		TermImp ct;
 		while(iter.hasNext()){
@@ -67,20 +71,25 @@ public class PolynomialImp implements Polynomial {
 			ct = (TermImp) iter.next();
 			firstIndex = termList.firstIndex(ct);
 			lastIndex = termList.lastIndex(ct);
+			while(firstIndex != lastIndex){
 			
-			if(firstIndex != lastIndex){
 				TermImp term1 = (TermImp) termList.get(firstIndex);
 				TermImp term2 = (TermImp) termList.get(lastIndex);
 				TermImp newTerm = new TermImp(term1.getCoefficient()+term2.getCoefficient(),term1.getExponent());
 						
-				termList.set(firstIndex, newTerm);
+				
 				termList.remove(lastIndex);
+				termList.set(firstIndex, newTerm);
+				
+				firstIndex = termList.firstIndex(ct);
+				lastIndex = termList.lastIndex(ct);
 				
 			}
+		
 		}
+		
 	 convertToStructure();
-	
-	
+	 
 	}
 	
 	//-----------------------------------------------------------------
@@ -98,14 +107,40 @@ public class PolynomialImp implements Polynomial {
 		PolynomialImp resultPol = new PolynomialImp();
 		Iterator<Term> iter1 =  this.iterator();
 		Iterator<Term> iter2 =  pp2.iterator();
-		
+		Term ct1 = null;
+		Term ct2 = null;
+		TermImp newterm = null;
+		ct1 = iter1.next();
+		ct2 = iter2.next();
 		while(iter1.hasNext()){
-			Term ct1 = iter1.next();
-			Term ct2 = iter2.next();
-			TermImp newterm = new TermImp(ct1.getCoefficient()+ct2.getCoefficient(),ct1.getExponent());
-			resultPol.termList.add(newterm);
-			resultPol.convertToStructure();
+			
+			if(ct1.getExponent() < ct2.getExponent()){
+				resultPol.termList.add(ct2);
+				ct2 = iter2.next();
+				
+			}
+			if(ct1.equals(ct2)){
+				newterm = new TermImp(ct1.getCoefficient()+ct2.getCoefficient(),ct1.getExponent());
+				resultPol.termList.add(newterm);
+				ct1 = iter1.next();
+				ct2 = iter2.next();
+			}
+			if(ct1.getExponent() > ct2.getExponent()){
+				resultPol.termList.add(ct1);
+				ct1 = iter1.next();
+			}
 		}
+		
+		resultPol.convertToStructure();
+		System.out.println("add method, final result is " + resultPol);
+		
+//		while(iter1.hasNext()){
+//			Term ct1 = iter1.next();
+//			Term ct2 = iter2.next();
+//			TermImp newterm = new TermImp(ct1.getCoefficient()+ct2.getCoefficient(),ct1.getExponent());
+//			resultPol.termList.add(newterm);
+//			resultPol.convertToStructure();
+//		}
 		
 	
 		return resultPol;
@@ -146,7 +181,8 @@ public class PolynomialImp implements Polynomial {
 			while(iter2.hasNext()){
 				ct2 = (TermImp) iter2.next();
 				TermImp newTerm = new TermImp(ct1.getCoefficient()*ct2.getCoefficient(),ct1.getExponent()+ct2.getExponent());
-				newPol.termList.add(newTerm);
+				if(newTerm.getCoefficient() != 0)
+					newPol.termList.add(newTerm);
 				
 			}
 			iter2 = pP2.iterator();
@@ -209,6 +245,7 @@ public class PolynomialImp implements Polynomial {
 			termList.set(termList.firstIndex(ct), newterm);
 		}
 		termList.add(new TermImp(1,0));
+		System.out.println(this);
 		return this;
 	}
 
@@ -248,7 +285,7 @@ public class PolynomialImp implements Polynomial {
 	@Override
 	public boolean equals(Polynomial P) {
 		
-		return (this.polynomialStructure.equals(((PolynomialImp) P).polynomialStructure));
+		return (this.polynomialStructure.equals( ((PolynomialImp) P).polynomialStructure));
 	}
 	// private class PolynomialIterator<Term> implements Iterator<Term>{}
 
